@@ -8,6 +8,6 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<Product, Long>, ProductRepositoryCustom {
 
     Optional<Product> findByBarcode(String barcode);
-    boolean existsByBarcode(String barcode);
+//    boolean existsByBarcode(String barcode);
 
 }

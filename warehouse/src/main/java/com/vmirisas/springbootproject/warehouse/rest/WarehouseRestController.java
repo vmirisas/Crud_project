@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
 @RestController
 @RequestMapping("/warehouse")
 public class WarehouseRestController {
@@ -14,36 +14,34 @@ public class WarehouseRestController {
     @Autowired
     private WarehouseService warehouseService;
 
-
-    // expose "/warehouses" and return list of warehouses
+    // expose "/warehouse" and return list of warehouses
     @GetMapping("")
     public List<WarehouseDTO> findAll() {
         return this.warehouseService.toDtoList(this.warehouseService.findAll());
     }
 
-    //  add mapping for GET /warehouses/{warehouseId}
+    //  add mapping for GET /warehouse/{warehouseId}
     @GetMapping("/{warehouseId}")
     public WarehouseDTO getWarehouse(@PathVariable Long warehouseId) {
         return new WarehouseDTO(this.warehouseService.findById(warehouseId));
     }
 
-    // add mapping for POST /warehouses = add new warehouse
-    @PostMapping("")
+    // add mapping for POST /warehouse/add = add new warehouse
+    @PostMapping("/add")
     public WarehouseDTO addWarehouse(@RequestBody WarehouseDTO theWarehouse){
         theWarehouse.setWarehouseId(null);
         return new WarehouseDTO(this.warehouseService.save(theWarehouse));
     }
 
-    // add mapping for PUT /warehouses = update existing warehouse
-    @PutMapping("")
+    // add mapping for PUT /warehouse/update = update existing warehouse
+    @PutMapping("/update")
     public WarehouseDTO updateWarehouse(@RequestBody WarehouseDTO theWarehouse) {
-        return new WarehouseDTO(this.warehouseService.save(theWarehouse));
+        return new WarehouseDTO(this.warehouseService.update(theWarehouse));
     }
 
-    // add mapping for DELETE /warehouses/{warehouseId} = delete existing warehouse
-    @DeleteMapping("/{warehouseId}")
-    public String deleteWarehouse(@PathVariable Long warehouseId) {
+    // add mapping for DELETE /warehouse/remove/{warehouseId} = delete existing warehouse
+    @DeleteMapping("/delete/{warehouseId}")
+    public void deleteWarehouse(@PathVariable Long warehouseId) {
         warehouseService.deleteById(warehouseId);
-        return "Warehouse with id '" + warehouseId + "' deleted";
     }
 }

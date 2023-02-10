@@ -11,6 +11,7 @@ import java.util.List;
 
 @Service
 public class WarehouseServiceImpl implements WarehouseService{
+
     @Autowired
     private WarehouseRepository warehouseRepository;
 
@@ -27,7 +28,13 @@ public class WarehouseServiceImpl implements WarehouseService{
     @Override
     public Warehouse save(WarehouseDTO theWarehouse) {
         return warehouseRepository.save(new Warehouse(theWarehouse));
+    }
 
+    @Override
+    public Warehouse update(WarehouseDTO theWarehouse) {
+        Warehouse warehouseToUpdate = findById(theWarehouse.getWarehouseId());
+        warehouseToUpdate.update(theWarehouse);
+        return warehouseRepository.save(warehouseToUpdate);
     }
 
     @Override

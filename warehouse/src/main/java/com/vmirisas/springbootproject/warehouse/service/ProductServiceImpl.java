@@ -31,9 +31,6 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Product save(ProductDTO theProduct) {
-//        boolean exists = this.productRepository.existsByBarcode(theProduct.getBarcode());
-//        if (exists) throw new RuntimeException("Barcode is already registered to another product");
-
         return productRepository.save(new Product(theProduct));
     }
 

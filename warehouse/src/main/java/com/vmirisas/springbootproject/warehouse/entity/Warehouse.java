@@ -40,7 +40,8 @@ public class Warehouse {
                 CascadeType.DETACH,
 //                CascadeType.MERGE,
                 CascadeType.PERSIST,
-                CascadeType.REFRESH
+                CascadeType.REFRESH,
+                CascadeType.REMOVE
             })
     private List<Shelf> shelves = new ArrayList<>();
 
@@ -65,6 +66,12 @@ public class Warehouse {
 
             this.shelves.add(shelf);
         }
+    }
+
+    public void update(WarehouseDTO warehouseDTO) {
+        this.warehouseCode = warehouseDTO.getWarehouseCode();
+        this.description = warehouseDTO.getDescription();
+
     }
 
 }

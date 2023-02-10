@@ -9,6 +9,9 @@ public interface WarehouseService {
     List<Warehouse> findAll();
     Warehouse findById (Long theId);
     Warehouse save(WarehouseDTO theWarehouse);
+
+    Warehouse update(WarehouseDTO theWarehouse);
+
     void deleteById(Long theId);
     List<WarehouseDTO> toDtoList(List<Warehouse> warehouses);
 }
